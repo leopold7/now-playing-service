@@ -1,3 +1,8 @@
+
+本项目相较原项目，支持 `鱼小曼点歌助手`，需替换本项目中 `Assets` 至你安装目录下的 `Assets` 文件夹和 `NowPlayingService.exe` 文件，`NowPlayingService.exe` 在[Release](https://github.com/leopold7/now-playing-service/releases)中可下载该文件;
+
+---
+
 <div align="center">
 
 ![Banner](/images/now_playing_2_banner_3.png)
