@@ -1,0 +1,98 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\code_workspace\\other\\now-playing-service\\external_programs\\AudioService\\CheckMusicProcess\\CheckMusicProcess.csproj": {}
+  },
+  "projects": {
+    "D:\\code_workspace\\other\\now-playing-service\\external_programs\\AudioService\\CheckMusicProcess\\CheckMusicProcess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\code_workspace\\other\\now-playing-service\\external_programs\\AudioService\\CheckMusicProcess\\CheckMusicProcess.csproj",
+        "projectName": "CheckMusicProcess",
+        "projectPath": "D:\\code_workspace\\other\\now-playing-service\\external_programs\\AudioService\\CheckMusicProcess\\CheckMusicProcess.csproj",
+        "packagesPath": "C:\\Users\\87081\\.nuget\\packages\\",
+        "outputPath": "D:\\code_workspace\\other\\now-playing-service\\external_programs\\AudioService\\CheckMusicProcess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\87081\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows10.0.26100.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows10.0.26100": {
+            "targetAlias": "net8.0-windows10.0.26100.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0-windows10.0.26100": {
+          "targetAlias": "net8.0-windows10.0.26100.0",
+          "dependencies": {
+            "System.CommandLine.DragonFruit": {
+              "target": "Package",
+              "version": "[0.4.0-alpha.22272.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[8.0.29, 8.0.29]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[8.0.29, 8.0.29]"
+            },
+            {
+              "name": "Microsoft.Windows.SDK.NET.Ref",
+              "version": "[10.0.26100.56, 10.0.26100.56]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[8.0.29, 8.0.29]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.Windows.SDK.NET.Ref": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\dotnet8\\sdk\\8.0.423/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

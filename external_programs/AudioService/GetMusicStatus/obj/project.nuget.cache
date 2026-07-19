@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "dgSpecHash": "cZKJ2Lfc+5Y=",
+  "success": true,
+  "projectFilePath": "D:\\code_workspace\\other\\now-playing-service\\external_programs\\AudioService\\GetMusicStatus\\GetMusicStatus.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\87081\\.nuget\\packages\\cscore\\1.2.1.2\\cscore.1.2.1.2.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\dubya.windowsmediacontroller\\2.5.5\\dubya.windowsmediacontroller.2.5.5.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.0\\microsoft.win32.systemevents.9.0.0.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\system.commandline\\2.0.0-beta4.22272.1\\system.commandline.2.0.0-beta4.22272.1.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\system.commandline.dragonfruit\\0.4.0-alpha.22272.1\\system.commandline.dragonfruit.0.4.0-alpha.22272.1.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\system.commandline.namingconventionbinder\\2.0.0-beta4.22272.1\\system.commandline.namingconventionbinder.2.0.0-beta4.22272.1.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\system.commandline.rendering\\0.4.0-alpha.22272.1\\system.commandline.rendering.0.4.0-alpha.22272.1.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\system.drawing.common\\9.0.0\\system.drawing.common.9.0.0.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.29\\microsoft.netcore.app.runtime.win-x64.8.0.29.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.29\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.29.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.29\\microsoft.aspnetcore.app.runtime.win-x64.8.0.29.nupkg.sha512",
+    "C:\\Users\\87081\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.26100.56\\microsoft.windows.sdk.net.ref.10.0.26100.56.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用“.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1”而不是项目目标框架“net8.0-windows10.0.26100”还原包“CSCore 1.2.1.2”。此包可能与项目不完全兼容。",
+      "libraryId": "CSCore",
+      "targetGraphs": [
+        "net8.0-windows10.0.26100"
+      ]
+    }
+  ]
+}

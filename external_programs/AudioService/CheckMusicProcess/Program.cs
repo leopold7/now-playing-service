@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace ProcessChecker
 {
@@ -35,6 +36,14 @@ namespace ProcessChecker
         {
             Console.OutputEncoding = Encoding.UTF8;
 
+            // 鱼小曼点歌助手：进程名也是 start.exe，与卡西米尔唱片机冲突，
+            // 因此改用本地 HTTP 接口判断是否在运行
+            if (platform == "yuxiaoman")
+            {
+                Console.WriteLine(IsYuXiaoManRunning() ? "true" : "false");
+                return;
+            }
+
             if (PlatformProcessMap.TryGetValue(platform, out string targetProcessName))
             {
                 Process[] processes = Process.GetProcessesByName(targetProcessName);
@@ -51,6 +60,29 @@ namespace ProcessChecker
             else
             {
                 Console.WriteLine("false");
+            }
+        }
+
+        /// <summary>
+        /// 通过鱼小曼点歌助手内嵌的本地 HTTP 接口判断是否正在运行
+        /// </summary>
+        private static bool IsYuXiaoManRunning()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.Timeout = TimeSpan.FromMilliseconds(1000);
+                    HttpResponseMessage response = client
+                        .GetAsync("http://127.0.0.1:17777/order/live-state")
+                        .GetAwaiter()
+                        .GetResult();
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

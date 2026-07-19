@@ -78,6 +78,7 @@ class Program
             { "huahua", (smtc) => new HuaHuaLiveService() },
             { "musicfree", (smtc) => smtc ? new MusicFreeSMTC() : new MusicFreeService() },
             { "bq", (smtc) => new BQLivePlayerService() },
+            { "yuxiaoman", (smtc) => new YuXiaoManService() },
             { "aimp", (smtc) => smtc ? new AIMPSMTC() : new AIMPService() },
             { "youtube", (smtc) => new YouTubeMusicSMTC() },
             { "miebo", (smtc) => new MieboService() },

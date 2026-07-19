@@ -341,6 +341,7 @@ public class CoverService {
             case "youtube":
             case "miebo":
             case "yesplay":
+            case "yuxiaoman":
                 return true;
 
             case "qq":
