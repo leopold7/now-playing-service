@@ -1,5 +1,5 @@
 
-本项目相较原项目，支持 `鱼小曼点歌助手`，需替换本项目中 `Assets` 至你安装目录下的 `Assets` 文件夹和 `NowPlayingService.exe` 文件，`NowPlayingService.exe` 在[Release](https://github.com/leopold7/now-playing-service/releases)中可下载该文件;
+本项目相较原项目，支持 [鱼小曼点歌助手（支持登录自己的QQ音乐和网易云）](https://github.com/leopold7/yuxiaoman-ordersong)，需替换本项目中 `Assets` 至你安装目录下的 `Assets` 文件夹和 `NowPlayingService.exe` 文件，`NowPlayingService.exe` 在[Release](https://github.com/leopold7/now-playing-service/releases)中可下载该文件;
 
 ---
 
