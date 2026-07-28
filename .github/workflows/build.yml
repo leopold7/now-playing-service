@@ -16,12 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # JDK 11 用于编译 Spring Boot 后端，以及后续运行 launch4j 生成 exe
-      - name: Setup JDK 11 (Temurin)
+      # JDK 17 用于运行 Maven（launch4j-maven-plugin 2.7.0 要求 Java 17 来加载插件本身）；
+      # 项目 source/target 仍为 11，故产出的 jar 仍为 Java 11 字节码，运行只需 JRE 11。
+      - name: Setup JDK 17 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '11'
+          java-version: '17'
           cache: maven
 
       # .NET 8 SDK 用于编译 C# 的 GetMusicStatus（目标框架 net8.0-windows10.0.26100.0）
