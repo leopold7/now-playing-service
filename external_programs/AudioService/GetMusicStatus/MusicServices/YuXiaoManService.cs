@@ -27,6 +27,11 @@ public class YuXiaoManService : MusicService
     private bool paused = true;
     private string prevCoverUrl = "";
 
+    // B 站视频真实播放进度（秒）与总时长（秒），来自 yuxiaoman 播放快照顶层字段
+    // -1 表示尚未取到（如音频元数据未加载 / 接口异常）
+    private int currentSec = -1;
+    private int totalSec = -1;
+
     public override void Init()
     {
         FetchMusicStatus();
@@ -41,6 +46,12 @@ public class YuXiaoManService : MusicService
 
         // 输出结果
         string status = paused ? "Paused" : "Playing";
+        // 仅当取到真实总时长时，追加 Progress 行让 Java 端用 B 站真实时长覆盖网易云时长
+        if (totalSec > 0)
+        {
+            int safeCurrent = currentSec < 0 ? 0 : currentSec;
+            return $"{status}\r\n{title + " - " + artist}\r\nProgress:{safeCurrent}|{totalSec}";
+        }
         return $"{status}\r\n{title + " - " + artist}";
     }
 
@@ -71,6 +82,8 @@ public class YuXiaoManService : MusicService
                         title = "";
                         artist = "";
                         paused = true;
+                        currentSec = -1;
+                        totalSec = -1;
                     }
                     else
                     {
@@ -81,6 +94,11 @@ public class YuXiaoManService : MusicService
                         // playing 缺失时，默认视为正在播放，避免误判为暂停
                         bool playing = jsonObject["playing"]?.Value<bool>() ?? true;
                         paused = !playing;
+
+                        // 读取 B 站视频真实播放进度与总时长（快照顶层字段）
+                        // 取不到时保持 -1，由 Java 端回退到网易云时长
+                        currentSec = jsonObject["currentTime"]?.Value<int>() ?? -1;
+                        totalSec = jsonObject["duration"]?.Value<int>() ?? -1;
 
                         // 保存封面
                         string coverUrl = now["coverUrl"]?.ToString() ?? "";

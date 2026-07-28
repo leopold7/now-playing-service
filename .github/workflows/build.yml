@@ -1,0 +1,76 @@
+name: Build NowPlayingService
+
+on:
+  push:
+    branches: [ dev, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # JDK 11 用于编译 Spring Boot 后端，以及后续运行 launch4j 生成 exe
+      - name: Setup JDK 11 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+          cache: maven
+
+      # .NET 8 SDK 用于编译 C# 的 GetMusicStatus（目标框架 net8.0-windows10.0.26100.0）
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 安装 Maven（windows runner 默认未预装）
+      - name: Install Maven
+        run: choco install maven -y
+        shell: powershell
+
+      # 1) 编译 Java 后端，产出 target/now-playing-0.0.1-SNAPSHOT.jar
+      - name: Build Java backend (Maven)
+        run: mvn -B clean package -DskipTests
+
+      # 2) 编译 C# 的 GetMusicStatus 并直接发布到 Assets/AudioService/，
+      #    覆盖其中的 GetMusicStatus.exe（包含 YuXiaoManService 的时长修复）
+      - name: Publish GetMusicStatus (self-contained, win-x64)
+        run: dotnet publish external_programs/AudioService/GetMusicStatus/GetMusicStatus.csproj -c Release -r win-x64 --self-contained -o Assets/AudioService
+
+      # 3) 将整个 Assets 目录打包为 Assets.zip（解压后即为 Assets/ 文件夹）
+      - name: Package Assets.zip
+        run: Compress-Archive -Path Assets -DestinationPath Assets.zip -Force
+
+      # 4) 用 launch4j（免费、可无头运行）把 fat jar 封装为 NowPlayingService.exe
+      #    说明：原项目 README 用商业软件 exe4j 生成此 exe，CI 无法使用，
+      #    故改用 launch4j 生成等效的「jar 启动型」exe（运行时需系统 JDK/JRE 11）。
+      - name: Download launch4j
+        run: |
+          $url = "https://sourceforge.net/projects/launch4j/files/launch4j-3/3.50/launch4j-3.50-win32.zip/download"
+          Invoke-WebRequest -Uri $url -OutFile launch4j.zip -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+          Expand-Archive -Path launch4j.zip -DestinationPath launch4j_tmp -Force
+
+      - name: Build NowPlayingService.exe via launch4j
+        run: java -jar launch4j_tmp/launch4j/launch4j.jar build/launch4j-config.xml
+
+      # 5) 上传两个产物到 workflow artifacts
+      - name: Upload Assets.zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: Assets
+          path: Assets.zip
+          if-no-files-found: error
+
+      - name: Upload NowPlayingService.exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: NowPlayingService
+          path: NowPlayingService.exe
+          if-no-files-found: error
