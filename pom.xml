@@ -155,7 +155,7 @@
                             <goal>launch4j</goal>
                         </goals>
                         <configuration>
-                            <headerType>gui</headerType>
+                            <headerType>console</headerType>
                             <outfile>NowPlayingService.exe</outfile>
                             <jar>target/now-playing-0.0.1-SNAPSHOT.jar</jar>
                             <classPath>
