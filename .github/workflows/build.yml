@@ -46,16 +46,13 @@ jobs:
       - name: Publish GetMusicStatus (self-contained, win-x64)
         run: dotnet publish external_programs/AudioService/GetMusicStatus/GetMusicStatus.csproj -c Release -r win-x64 --self-contained -o Assets/AudioService
 
-      # 3) 将整个 Assets 目录打包为 Assets.zip（解压后即为 Assets/ 文件夹）
-      - name: Package Assets.zip
-        run: Compress-Archive -Path Assets -DestinationPath Assets.zip -Force
-
-      # 4) 上传两个产物到 workflow artifacts
-      - name: Upload Assets.zip
+      # 3) 直接上传 Assets 目录：upload-artifact 会自动打包成名为 Assets.zip 的 artifact，
+      #    解压后即为 Assets/ 文件夹，避免再手动 Compress-Archive 造成双层嵌套。
+      - name: Upload Assets
         uses: actions/upload-artifact@v4
         with:
           name: Assets
-          path: Assets.zip
+          path: Assets
           if-no-files-found: error
 
       - name: Upload NowPlayingService.exe
