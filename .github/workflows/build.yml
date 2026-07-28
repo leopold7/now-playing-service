@@ -35,7 +35,8 @@ jobs:
         run: choco install maven -y
         shell: powershell
 
-      # 1) 编译 Java 后端，产出 target/now-playing-0.0.1-SNAPSHOT.jar
+      # 1) 编译 Java 后端，产出 target/now-playing-0.0.1-SNAPSHOT.jar，
+      #    并由 launch4j-maven-plugin 在 package 阶段直接生成 NowPlayingService.exe
       - name: Build Java backend (Maven)
         run: mvn -B clean package -DskipTests
 
@@ -48,19 +49,7 @@ jobs:
       - name: Package Assets.zip
         run: Compress-Archive -Path Assets -DestinationPath Assets.zip -Force
 
-      # 4) 用 launch4j（免费、可无头运行）把 fat jar 封装为 NowPlayingService.exe
-      #    说明：原项目 README 用商业软件 exe4j 生成此 exe，CI 无法使用，
-      #    故改用 launch4j 生成等效的「jar 启动型」exe（运行时需系统 JDK/JRE 11）。
-      - name: Download launch4j
-        run: |
-          $url = "https://sourceforge.net/projects/launch4j/files/launch4j-3/3.50/launch4j-3.50-win32.zip/download"
-          Invoke-WebRequest -Uri $url -OutFile launch4j.zip -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-          Expand-Archive -Path launch4j.zip -DestinationPath launch4j_tmp -Force
-
-      - name: Build NowPlayingService.exe via launch4j
-        run: java -jar launch4j_tmp/launch4j/launch4j.jar build/launch4j-config.xml
-
-      # 5) 上传两个产物到 workflow artifacts
+      # 4) 上传两个产物到 workflow artifacts
       - name: Upload Assets.zip
         uses: actions/upload-artifact@v4
         with:

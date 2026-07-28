@@ -143,6 +143,34 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- 将 Spring Boot fat jar 封装为 NowPlayingService.exe（launch4j 二进制由 Maven Central 拉取，无需 SourceForge） -->
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.7.0</version>
+                <executions>
+                    <execution>
+                        <id>l4j-exe</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>NowPlayingService.exe</outfile>
+                            <jar>target/now-playing-0.0.1-SNAPSHOT.jar</jar>
+                            <classPath>
+                                <!-- 用 Spring Boot 启动器作为入口，确保 fat jar 能正确启动 -->
+                                <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
+                            </classPath>
+                            <jre>
+                                <minVersion>11</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                            </jre>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
